@@ -66,9 +66,60 @@ ca-key.pem     ib_logfile1	mysql.sock.lock  sys
   <pre>mysql1</pre>
   <h4>To delete the MySQL container, stop it first, and then use the docker rm command:</h4>
   <p><code>$ docker stop mysql1</code></p>
-  <p><code>$ docker rm mysql1</code></p>
-  
-  
-  </section>  
+  <p><code>$ docker rm mysql1</code></p>  
+  </section>
+   <section>
+     <h4>Docker Network</h4>
+     <p><code>$ docker network list</code></p>
+     <pre>NETWORK ID          NAME                DRIVER              SCOPE
+d6aca9e061a2        bridge              bridge              local
+8029d52bdce8        host                host                local
+fb59ee8ce51c        none                null                local
+</pre>
+     <h4> Add a new Network</h4>
+     <p><code>$ docker network create mysqlNetwork</code></p>
+     <pre>71a1005c9d8c0440a5856a1ab74c505bd327f33d3c4222ec59912ae6cdae4735</pre>
+     <h4>List the network</h4>
+     <p><code>$ docker network list</code></p>
+     <pre>NETWORK ID          NAME                DRIVER              SCOPE
+d6aca9e061a2        bridge              bridge              local
+8029d52bdce8        host                host                local
+71a1005c9d8c        mysqlNetwork        bridge              local
+fb59ee8ce51c        none                null                local
+</pre>
+     <h4>Inspect a particular network using ID or Name</h4>
+     <p><code>$ docker network inspect mysqlNetwork</code></p>
+     <pre>[
+    {
+        "Name": "mysqlNetwork",
+        "Id": "71a1005c9d8c0440a5856a1ab74c505bd327f33d3c4222ec59912ae6cdae4735",
+        "Created": "2019-07-28T17:15:42.012206203+04:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+</pre>
+   </section>
     
 </body></html>
