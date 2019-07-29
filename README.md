@@ -21,8 +21,8 @@ hello-world          latest              fce289e99eb9        6 months ago       
 </pre>
     <h4>Start a new Docker container for the MySQL Server:</h4>
   <p><code>$docker run --name=mysql1 -d mysql/mysql-server:latest</code> #name is optional. If not provided will be assigned one. #-d  makes the container run in the background.<p>
-     <p><code>$docker ps</code></p>
-    <pre>CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS                   PORTS                 NAMES
+    <p><code>docker run --name=mysql1  -e MYSQL_ROOT_HOST=% -p 3306:3306 -d mysql/mysql-server</code></p>
+     <p><code>$docker ps</code></p><pre>CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS                   PORTS                 NAMES
 10ed6e9fd73b        mysql/mysql-server:latest   "/entrypoint.sh mysq…"   About an hour ago   Up 5 minutes (healthy)   3306/tcp, 33060/tcp   mysql1
 </pre>
     <p><code>$docker logs mysql1</code></p> 
@@ -43,6 +43,10 @@ mysql&gt;</pre>
 <h4>Change root password:</h4>
 <p><code>mysql&gt; ALTER USER 'root'@'localhost' IDENTIFIED BY 'newpassword';</code></p>
  <pre>Query OK, 0 rows affected (0.17 sec)</pre> 
+ <pre>mysql&gt;create database test;
+mysql&gt;CREATE USER 'test_user'@'%' IDENTIFIED BY 'test_user';
+mysql&gt;GRANT ALL PRIVILEGES ON *.* TO 'test_user'@'%';
+</pre>
  <h4>Start the bash shell within the container mysql1<h4>
   <p><code>$ docker exec -it mysql1 bash </code></p>
   <pre>bash-4.2# </pre>
